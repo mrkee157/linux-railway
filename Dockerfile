@@ -18,8 +18,7 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir /var/run/sshd
 
 # Tạo user 
-RUN useradd -rm -d /home/kee -s /bin/bash -g root -G sudo -u 1000 kee && \
-    echo 'kee:kee157' | chpasswd || true
+RUN useradd -rm -d /home/kee -s /bin/bash -g root -G sudo -u 1000 -p $(openssl passwd -1 'kee157') kee
 
 # Đảm bảo thư mục SSH và quyền được cấp đúng
 RUN mkdir -p /home/kee/.ssh && chown -R kee:root /home/kee
